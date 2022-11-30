@@ -1,25 +1,32 @@
 import br.com.dio.desafio.dominio.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Curso curso1 = new Curso();
-        curso1.setTitulo("Java");
-        curso1.setDescricao("Descrição curso Java");
-        curso1.setCargaHoraria(80);
+        Curso curso1 = null;
+        Curso curso2 = null;
 
-        Curso curso2 = new Curso();
-        curso2.setTitulo("Js");
-        curso2.setDescricao("Descrição curso Js");
-        curso2.setCargaHoraria(50);
-        //System.out.println(curso1);
+        try {
+            curso1 = new Curso();
+            curso1.setTitulo(JOptionPane.showInputDialog("Digite o titulo do Curso: "));
+            curso1.setDescricao(JOptionPane.showInputDialog("Digite descrição do Curso: "));
+            curso1.setCargaHoraria(Integer.parseInt(JOptionPane.showInputDialog("Digite a carga horária do Curso: ")));
+            if (curso1.getCargaHoraria() != 0) {
+                curso2 = new Curso();
+                curso2.setTitulo("Js");
+                curso2.setDescricao("Descrição curso Js");
+                curso2.setCargaHoraria(50);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Insira um número válido." + e.getMessage());
+        }
 
         Mentoria mentoria1 = new Mentoria();
         mentoria1.setTitulo("Mentoria de Java");
         mentoria1.setDescricao("Mentoria de Java");
         mentoria1.setData(LocalDate.now());
-        //System.out.println(mentoria1);
 
         Bootcamp bootcamp = new Bootcamp();
         bootcamp.setNome("Bootcamp Java Developer");
@@ -51,6 +58,11 @@ public class Main {
         System.out.println("XP: " + devLower.calcularTotalXp());
 
 
-        // Exemmplo de poliformismo : Conteudo conteudo = new Curso();
+//      curso1.setTitulo(a);
+
+        //System.out.println(curso1);
+        //System.out.println(mentoria1);
+
+        // Exemplo de poliformismo : Conteudo conteudo = new Curso();
     }
 }
